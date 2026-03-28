@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Work — Priya Ranjan Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #09090B;
+  --surface:  #111115;
+  --card:     #16161C;
+  --border:   #1F1F28;
+  --gold:     #E8C547;
+  --gold-dim: #9A832E;
+  --white:    #F4F1EB;
+  --muted:    #6B6872;
+  --red:      #E05555;
+  --green:    #4CAF7D;
+  --radius:   12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(9,9,11,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 3px;
+  color: var(--gold); text-decoration: none;
+}
+
+.nav-right { display: flex; align-items: center; gap: 24px; }
+
+.back-link {
+  color: var(--muted); text-decoration: none;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  transition: color .2s;
+}
+.back-link:hover { color: var(--white); }
+
+.edit-toggle {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 9px 18px; border-radius: 6px;
+  cursor: pointer; transition: all .2s;
+}
+.edit-toggle:hover { border-color: var(--gold); color: var(--gold); }
+.edit-toggle.active { background: rgba(232,197,71,.12); border-color: var(--gold); color: var(--gold); }
+
+.edit-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--muted); transition: background .2s;
+}
+.edit-toggle.active .edit-dot { background: var(--gold); }
+
+/* ── HERO ── */
+.page-hero {
+  padding: 140px 48px 60px;
+  position: relative; overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px; opacity: .3;
+  mask-image: radial-gradient(ellipse 70% 100% at 50% 0%, black 20%, transparent 100%);
+}
+
+.page-hero-inner { position: relative; }
+
+.page-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(232,197,71,.25);
+  background: rgba(232,197,71,.08);
+  color: var(--gold); font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 7px 14px; border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.page-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: .95; letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.page-hero h1 span { color: var(--gold); }
+
+.page-hero p {
+  color: var(--muted); font-size: 15px;
+  max-width: 560px; line-height: 1.8;
+}
+
+/* ── SIDEBAR NAV ── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  min-height: 100vh;
+  padding: 0 0 100px;
+}
+
+.sidebar {
+  position: sticky; top: 64px;
+  height: calc(100vh - 64px);
+  border-right: 1px solid var(--border);
+  padding: 40px 0;
+  overflow-y: auto;
+}
+
+.sidebar-nav { display: flex; flex-direction: column; }
+
+.sidebar-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 24px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: .5px;
+  border-left: 2px solid transparent;
+  transition: all .2s;
+}
+.sidebar-link:hover { color: var(--white); background: rgba(255,255,255,.03); }
+.sidebar-link.active { color: var(--gold); border-left-color: var(--gold); background: rgba(232,197,71,.05); }
+
+.sidebar-icon { font-size: 16px; }
+
+.sidebar-count {
+  margin-left: auto;
+  background: var(--border);
+  color: var(--muted);
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 100px;
+}
+
+/* ── MAIN CONTENT ── */
+.main-content { padding: 48px 56px; }
+
+.section-block {
+  margin-bottom: 80px;
+  scroll-margin-top: 80px;
+}
+
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header-left { display: flex; align-items: center; gap: 14px; }
+
+.section-icon {
+  width: 44px; height: 44px;
+  background: rgba(232,197,71,.1);
+  border: 1px solid rgba(232,197,71,.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+
+.section-title-text h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 1px; color: var(--white);
+}
+
+.section-title-text p {
+  font-size: 12px; color: var(--muted); margin-top: 2px;
+}
+
+/* Add button */
+.btn-add {
+  display: none;
+  align-items: center; gap: 6px;
+  background: rgba(232,197,71,.1);
+  border: 1px solid rgba(232,197,71,.25);
+  color: var(--gold);
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 6px;
+  cursor: pointer; transition: all .2s;
+}
+.btn-add:hover { background: rgba(232,197,71,.2); }
+body.edit-mode .btn-add { display: flex; }
+
+/* ── CARDS ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.cards-list { display: flex; flex-direction: column; gap: 16px; }
+
+.work-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .3s, transform .3s;
+  position: relative;
+}
+.work-card:hover { border-color: #2A2A36; transform: translateY(-2px); }
+
+.card-actions {
+  display: none;
+  position: absolute; top: 12px; right: 12px;
+  gap: 6px; z-index: 10;
+}
+body.edit-mode .card-actions { display: flex; }
+
+.card-btn {
+  width: 30px; height: 30px;
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; cursor: pointer;
+  transition: all .2s;
+}
+.card-btn.edit-btn:hover { border-color: var(--gold); background: rgba(232,197,71,.1); }
+.card-btn.del-btn:hover  { border-color: var(--red);  background: rgba(224,85,85,.1); }
+
+/* card types */
+.card-top {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-role {
+  font-size: 15px; font-weight: 700; color: var(--white);
+  margin-bottom: 4px; padding-right: 80px;
+}
+
+.card-sub {
+  font-size: 12px; color: var(--gold); font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card-date {
+  font-size: 11px; color: var(--muted); font-weight: 600;
+  letter-spacing: .8px;
+}
+
+.card-body { padding: 20px 24px; }
+
+.card-points {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.card-points li {
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+  padding-left: 14px; position: relative;
+}
+.card-points li::before {
+  content: '–'; position: absolute; left: 0; color: var(--gold);
+}
+
+.card-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 16px;
+}
+
+.tag {
+  font-size: 11px; font-weight: 600; letter-spacing: .4px;
+  color: var(--gold);
+  background: rgba(232,197,71,.07);
+  border: 1px solid rgba(232,197,71,.16);
+  padding: 3px 9px; border-radius: 4px;
+}
+
+.card-outcome {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(76,175,125,.08);
+  border: 1px solid rgba(76,175,125,.2);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 12px; font-weight: 700; color: var(--green);
+  margin-top: 12px;
+}
+
+/* cert card */
+.cert-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex; align-items: flex-start; gap: 16px;
+  transition: border-color .3s;
+  position: relative;
+}
+.cert-card:hover { border-color: #2A2A36; }
+
+.cert-badge {
+  width: 48px; height: 48px;
+  background: rgba(232,197,71,.1);
+  border: 1px solid rgba(232,197,71,.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+
+.cert-info { flex: 1; }
+.cert-name { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.cert-issuer { font-size: 12px; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+.cert-year { font-size: 11px; color: var(--muted); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,.7);
+  backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 100%; max-width: 600px;
+  max-height: 85vh; overflow-y: auto;
+  padding: 36px;
+  animation: slideUp .25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.modal h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 1px;
+  margin-bottom: 24px; color: var(--white);
+}
+
+.form-group { margin-bottom: 18px; }
+
+.form-group label {
+  display: block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color .2s;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(--gold); }
+
+.form-group textarea { min-height: 90px; }
+
+.form-note {
+  font-size: 11px; color: var(--muted); margin-top: 5px;
+}
+
+.modal-actions {
+  display: flex; gap: 10px; justify-content: flex-end;
+  margin-top: 28px; padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px; font-weight: 700;
+  padding: 10px 22px; border-radius: 8px;
+  cursor: pointer; transition: all .2s;
+}
+.btn-cancel:hover { border-color: var(--white); color: var(--white); }
+
+.btn-save {
+  background: var(--gold); color: #000;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px; font-weight: 800;
+  padding: 10px 28px; border-radius: 8px;
+  border: none; cursor: pointer; transition: opacity .2s;
+}
+.btn-save:hover { opacity: .88; }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
+.empty-state p { font-size: 13px; }
+
+/* ── FOOTER ── */
+.page-footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.page-footer .logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: var(--gold); }
+.page-footer p { font-size: 12px; color: var(--muted); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .page-hero { padding: 120px 20px 40px; }
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .main-content { padding: 32px 20px; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+
+/* reveal anim */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s, transform .5s; }
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">PRK</a>
+  <div class="nav-right">
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+    <button class="edit-toggle" id="editToggle" onclick="toggleEditMode()">
+      <div class="edit-dot"></div>
+      Edit Mode
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">📂 Full Work Portfolio</div>
+    <h1>MY <span>WORK</span><br/>& EXPERTISE</h1>
+    <p>A comprehensive look at my experience, projects, certifications, and capabilities — built for teams and companies who want to understand exactly what I bring to the table.</p>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a class="sidebar-link active" href="#experience" data-section="experience">
+        <span class="sidebar-icon">💼</span> Experience
+        <span class="sidebar-count" id="cnt-experience">4</span>
+      </a>
+      <a class="sidebar-link" href="#projects" data-section="projects">
+        <span class="sidebar-icon">🚀</span> Projects
+        <span class="sidebar-count" id="cnt-projects">3</span>
+      </a>
+      <a class="sidebar-link" href="#certifications" data-section="certifications">
+        <span class="sidebar-icon">🎓</span> Certifications
+        <span class="sidebar-count" id="cnt-certifications">5</span>
+      </a>
+      <a class="sidebar-link" href="#research" data-section="research">
+        <span class="sidebar-icon">🔍</span> Research
+        <span class="sidebar-count" id="cnt-research">2</span>
+      </a>
+      <a class="sidebar-link" href="#creative" data-section="creative">
+        <span class="sidebar-icon">🎨</span> Creative Design
+        <span class="sidebar-count" id="cnt-creative">2</span>
+      </a>
+      <a class="sidebar-link" href="#strategy" data-section="strategy">
+        <span class="sidebar-icon">♟️</span> Strategy
+        <span class="sidebar-count" id="cnt-strategy">3</span>
+      </a>
+      <a class="sidebar-link" href="#workflow" data-section="workflow">
+        <span class="sidebar-icon">⚙️</span> Workflow
+        <span class="sidebar-count" id="cnt-workflow">2</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- 1. EXPERIENCE -->
+    <div class="section-block reveal" id="experience">
+      <div class="section-header">
+        <div class="section-header-left">
+          <div class="section-icon">💼</div>
+          <div class="section-title-text">
+            <h2>EXPERIENCE</h2>
+            <p>Professional roles & impact delivered</p>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openModal('experience')">+ Add Role</button>
+      </div>
+      <div class="cards-list" id="list-experience"></div>
+    </div>
+
+    <!-- 2. PROJECTS -->
+    <div class="section-block reveal" id="projects">
+      <div class="section-header">
+        <div class="section-header-left">
+          <div class="section-icon">🚀</div>
+          <div class="section-title-text">
+            <h2>PROJECTS</h2>
+            <p>Academic, personal & client work</p>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openModal('projects')">+ Add Project</button>
+      </div>
+      <div class="cards-grid" id="list-projects"></div>
+    </div>
+
+    <!-- 3. CERTIFICATIONS -->
+    <div class="section-block reveal" id="certifications">
+      <div class="section-header">
+        <div class="section-header-left">
+          <div class="section-icon">🎓</div>
+          <div class="section-title-text">
+            <h2>CERTIFICATIONS</h2>
+            <p>Verified skills & credentials</p>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openModal('certifications')">+ Add Cert</button>
+      </div>
+      <div class="cards-grid" id="list-certifications"></div>
+    </div>
+
+    <!-- 4. RESEARCH -->
+    <div class="section-block reveal" id="research">
+      <div class="section-header">
+        <div class="section-header-left">
+          <div class="section-icon">🔍</div>
+          <div class="section-title-text">
+            <h2>RESEARCH</h2>
+            <p>Data-driven studies & market intelligence</p>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openModal('research')">+ Add Research</button>
+      </div>
+      <div class="cards-grid" id="list-research"></div>
+    </div>
+
+    <!-- 5. CREATIVE DESIGN -->
+    <div class="section-block reveal" id="creative">
+      <div class="section-header">
+        <div class="section-header-left">
+          <div class="section-icon">🎨</div>
+          <div class="section-title-text">
+            <h2>CREATIVE DESIGN</h2>
+            <p>Campaigns, creatives & visual strategy</p>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openModal('creative')">+ Add Work</button>
+      </div>
+      <div class="cards-grid" id="list-creative"></div>
+    </div>
+
+    <!-- 6. STRATEGY -->
+    <div class="section-block reveal" id="strategy">
+      <div class="section-header">
+        <div class="section-header-left">
+          <div class="section-icon">♟️</div>
+          <div class="section-title-text">
+            <h2>STRATEGY</h2>
+            <p>Marketing frameworks & consulting work</p>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openModal('strategy')">+ Add Strategy</button>
+      </div>
+      <div class="cards-grid" id="list-strategy"></div>
+    </div>
+
+    <!-- 7. WORKFLOW -->
+    <div class="section-block reveal" id="workflow">
+      <div class="section-header">
+        <div class="section-header-left">
+          <div class="section-icon">⚙️</div>
+          <div class="section-title-text">
+            <h2>WORKFLOW</h2>
+            <p>Tools, processes & how I operate</p>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openModal('workflow')">+ Add Workflow</button>
+      </div>
+      <div class="cards-grid" id="list-workflow"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="logo">PRK</div>
+  <p>© 2025 Priya Ranjan Kumar · Full-Stack Marketing Consultant</p>
+  <a href="index.html" style="color:var(--gold); font-size:13px; font-weight:700; text-decoration:none;">← Back to Portfolio</a>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitle">Add Entry</h3>
+    <div id="modalForm"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveEntry()">Save Entry</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// DEFAULT DATA
+// ─────────────────────────────────────────────
+const defaultData = {
+  experience: [
+    {
+      id: 1,
+      role: "Performance Marketing Associate",
+      company: "Unbundl — Marketing Agency, Delhi",
+      date: "Nov 2024 – Present",
+      points: [
+        "Managing ₹1Cr+ monthly ad budget across Google Ads and Meta platforms with full strategic ownership.",
+        "Generating 11,000+ qualified leads per month for a healthcare brand through audience-first targeting.",
+        "Cut Cost Per Lead by 25% (₹600 → ₹450) through bid restructuring and creative A/B testing.",
+        "Improved overall campaign performance by 30% by scaling winners and eliminating underperformers.",
+        "Leading client reporting, performance reviews, and strategic growth discussions with stakeholders."
+      ],
+      tags: ["Google Ads","Meta Ads","PMax","A/B Testing","Healthcare","Lead Generation"]
+    },
+    {
+      id: 2,
+      role: "Market Research Analyst — Cybersecurity Domain",
+      company: "Cybersecurity Company (Confidential)",
+      date: "July 2025 – Oct 2025",
+      points: [
+        "Conducted OSINT research to gather and synthesize cybersecurity intelligence for strategic investigations.",
+        "Structured and validated large datasets for digital risk assessment using analytical frameworks.",
+        "Delivered structured intelligence reports identifying vulnerabilities and risk patterns to stakeholders."
+      ],
+      tags: ["OSINT Research","Data Analysis","Risk Assessment","Intelligence Reporting"]
+    },
+    {
+      id: 3,
+      role: "Digital Marketing Intern (B2B)",
+      company: "Next Gen Global Pvt. Ltd",
+      date: "July 2024 – Oct 2024",
+      points: [
+        "Executed Google Ads and Meta campaigns focused on CTR and CPC improvement.",
+        "Identified high-demand products via competitor analysis, contributing to a 10% sales uplift.",
+        "Drove 15% increase in web traffic through A/B tested targeting and messaging improvements.",
+        "Built Excel KPI dashboards tracking performance across 30+ Business Development Executives."
+      ],
+      tags: ["Google Ads","Meta Ads","SEO","Excel Dashboards","B2B","Competitor Analysis"]
+    },
+    {
+      id: 4,
+      role: "Talent Acquisition & CRM Outreach",
+      company: "Freelance",
+      date: "Oct 2024 – Nov 2024",
+      points: [
+        "Ran targeted email and CRM outreach to 100+ candidates, improving conversion by 30%.",
+        "Used Manatal ATS to manage pipeline efficiency across the hiring journey.",
+        "Maintained 90% interview completion rate using data-driven follow-up cadences."
+      ],
+      tags: ["CRM Outreach","Manatal ATS","Email Campaigns","Pipeline Management"]
+    }
+  ],
+  projects: [
+    {
+      id: 1,
+      role: "CESIM Global Challenge — Capstone",
+      company: "Cross-Functional Business Simulation",
+      date: "April 2024 – May 2024",
+      points: [
+        "Led market entry, AI-informed pricing strategy, and multi-channel budget allocation in a competitive simulation.",
+        "Applied predictive modelling to reallocate budgets dynamically, achieving 20% virtual market share growth.",
+        "Explored AI-assisted scenario planning to model competitor responses and optimise marketing mix in real time."
+      ],
+      tags: ["Strategy","AI Planning","Budget Allocation","Simulation"],
+      outcome: "🥉 Top 3 teams — analytical rigor & strategic agility"
+    },
+    {
+      id: 2,
+      role: "Circular Fashion — Digital Awareness Campaign",
+      company: "Innovation & Design Thinking Project",
+      date: "Feb 2024 – May 2024",
+      points: [
+        "Conducted ethnographic interviews and quantitative surveys (50+ respondents) for consumer behaviour insights.",
+        "Built a consumer-focused Figma prototype with AI-suggested UX patterns for optimised user journeys.",
+        "Leveraged AI-driven content ideation to align supplier data with sustainability brand messaging."
+      ],
+      tags: ["Figma","UX Design","Content Strategy","AI Ideation","Sustainability"],
+      outcome: "📈 Simulated 30% increase in user interaction"
+    },
+    {
+      id: 3,
+      role: "OTT vs. Cinema — Consumer Behaviour Study",
+      company: "Marketing Research Project",
+      date: "Aug 2023 – Dec 2023",
+      points: [
+        "Mixed-methods study with 200+ responses analysing content consumption behaviour across platforms.",
+        "Applied AI-assisted sentiment analysis and thematic coding to accelerate insight extraction at scale.",
+        "Built user personas and positioning frameworks using predictive segmentation logic."
+      ],
+      tags: ["Market Research","Sentiment Analysis","User Personas","Segmentation"],
+      outcome: "🏅 Recognised as top-performing project for data storytelling"
+    }
+  ],
+  certifications: [
+    { id: 1, name: "Google Ads Search Certification", issuer: "Google", year: "2024", emoji: "🔵" },
+    { id: 2, name: "Google Analytics 4 Certification", issuer: "Google", year: "2024", emoji: "📊" },
+    { id: 3, name: "Digital Marketing", issuer: "MoMSME — Government of India", year: "2024", emoji: "🇮🇳" },
+    { id: 4, name: "Business Analytics", issuer: "MoMSME — Government of India", year: "2024", emoji: "📈" },
+    { id: 5, name: "Strategy Consulting", issuer: "BCG Forage", year: "2024", emoji: "♟️" }
+  ],
+  research: [
+    {
+      id: 1,
+      role: "OTT vs. Cinema Consumer Behaviour",
+      company: "Mixed-Methods Marketing Research",
+      date: "Aug 2023 – Dec 2023",
+      points: [
+        "Gathered 200+ survey responses across demographics to map content platform migration patterns.",
+        "Used AI-assisted sentiment analysis and thematic coding to extract insight at scale from qualitative data.",
+        "Built predictive user personas that informed positioning strategies for streaming brands."
+      ],
+      tags: ["Mixed-Methods","Survey Research","Sentiment Analysis","Persona Development"],
+      outcome: "🏅 Top-performing project — IIIT Lucknow"
+    },
+    {
+      id: 2,
+      role: "Cybersecurity Intelligence Research",
+      company: "Confidential — Cybersecurity Company",
+      date: "July 2025 – Oct 2025",
+      points: [
+        "Conducted OSINT research to gather open-source intelligence on digital threat actors.",
+        "Structured and validated large datasets for digital risk profiling and vulnerability mapping.",
+        "Produced structured intelligence reports for strategic decision-making by senior stakeholders."
+      ],
+      tags: ["OSINT","Digital Risk","Intelligence Reports","Data Validation"]
+    }
+  ],
+  creative: [
+    {
+      id: 1,
+      role: "Healthcare Brand Ad Creative Strategy",
+      company: "Unbundl — Client Campaign",
+      date: "Nov 2024 – Present",
+      points: [
+        "Developed ad creative briefs and copy frameworks for Google and Meta campaigns targeting healthcare audiences.",
+        "A/B tested multiple creative angles, headline formats, and visual CTAs — scaling winners that drove 30% performance uplift.",
+        "Collaborated with design teams to align visuals with campaign messaging and audience psychology."
+      ],
+      tags: ["Ad Copywriting","Creative Strategy","A/B Testing","Healthcare Creative","Meta Creatives"]
+    },
+    {
+      id: 2,
+      role: "Circular Fashion Digital Campaign",
+      company: "Design Thinking Project",
+      date: "Feb 2024 – May 2024",
+      points: [
+        "Designed a consumer-facing Figma prototype with AI-informed UX flows for a sustainability awareness campaign.",
+        "Created a full campaign blueprint — from content strategy and visual identity to user journey and CTAs.",
+        "Integrated ethical sourcing narratives into creative content, aligning brand values with audience expectations."
+      ],
+      tags: ["Figma","UI/UX","Brand Narrative","Campaign Design","Visual Strategy"],
+      outcome: "📈 Simulated 30% engagement uplift"
+    }
+  ],
+  strategy: [
+    {
+      id: 1,
+      role: "Full-Funnel Performance Strategy",
+      company: "Unbundl — Healthcare Client",
+      date: "Nov 2024 – Present",
+      points: [
+        "Architected a full-funnel paid media strategy from awareness through conversion for a major healthcare brand.",
+        "Defined audience segmentation logic, channel mix, budget allocation, and bidding framework from scratch.",
+        "Built KPI frameworks and reporting dashboards aligned to client business goals — not just media metrics."
+      ],
+      tags: ["Full-Funnel","Media Strategy","Budget Allocation","KPI Framework","Healthcare"]
+    },
+    {
+      id: 2,
+      role: "CESIM Market Entry Strategy",
+      company: "Capstone Business Simulation",
+      date: "April 2024 – May 2024",
+      points: [
+        "Developed market entry, pricing, and advertising strategy in a multi-team competitive simulation.",
+        "Used data-driven analysis to dynamically reallocate resources and outpace competitors.",
+        "Applied AI-assisted scenario modelling to test strategic decisions before execution."
+      ],
+      tags: ["Market Entry","Pricing Strategy","Competitive Analysis","AI Modelling"],
+      outcome: "🥉 Top 3 teams globally"
+    },
+    {
+      id: 3,
+      role: "B2B Lead Generation Strategy",
+      company: "Next Gen Global Pvt. Ltd",
+      date: "July 2024 – Oct 2024",
+      points: [
+        "Defined targeting strategy and messaging framework for a B2B Google and Meta campaign.",
+        "Identified high-demand product categories through competitor and market analysis.",
+        "Built performance tracking infrastructure across 30+ BDEs using Excel dashboards."
+      ],
+      tags: ["B2B Strategy","Lead Generation","Competitor Analysis","Performance Tracking"]
+    }
+  ],
+  workflow: [
+    {
+      id: 1,
+      role: "Campaign Management Workflow",
+      company: "Standard Operating Process",
+      date: "2024 – Present",
+      points: [
+        "Discovery → Audience Research → Campaign Architecture → Creative Brief → Launch → Daily Monitoring → Weekly Optimisation → Monthly Review.",
+        "Tools: Google Ads Editor, Meta Ads Manager, GA4, SEMrush, Power BI, HubSpot CRM, GSheets.",
+        "All campaigns tracked in custom dashboards with automated alerts for CPL spikes or CTR drops.",
+        "Client communication via structured weekly reports — no surprises, full transparency."
+      ],
+      tags: ["Google Ads","Meta Ads","GA4","Power BI","HubSpot","Process Design"]
+    },
+    {
+      id: 2,
+      role: "Research & Intelligence Workflow",
+      company: "Consulting & Analysis Process",
+      date: "2024 – Present",
+      points: [
+        "Problem Definition → Data Collection (Primary/Secondary) → OSINT Research → Pattern Analysis → Report → Recommendation.",
+        "Qualitative: Interviews, ethnographic research, thematic coding.",
+        "Quantitative: Survey design, Excel/Power BI analysis, segmentation modelling.",
+        "Deliverable: Structured intelligence reports with actionable, prioritised recommendations."
+      ],
+      tags: ["OSINT","Survey Design","Thematic Coding","Power BI","Intelligence Reports"]
+    }
+  ]
+};
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let data = JSON.parse(localStorage.getItem('prk_works_data') || 'null') || JSON.parse(JSON.stringify(defaultData));
+let editMode = false;
+let modalSection = null;
+let editingId = null;
+
+function save() {
+  localStorage.setItem('prk_works_data', JSON.stringify(data));
+}
+
+// ─────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────
+function renderAll() {
+  renderExperience();
+  renderProjects();
+  renderCertifications();
+  renderResearch();
+  renderCreative();
+  renderStrategy();
+  renderWorkflow();
+  updateCounts();
+}
+
+function cardActions(section, id) {
+  return `
+    <div class="card-actions">
+      <button class="card-btn edit-btn" onclick="openModal('${section}',${id})" title="Edit">✏️</button>
+      <button class="card-btn del-btn" onclick="deleteEntry('${section}',${id})" title="Delete">🗑️</button>
+    </div>`;
+}
+
+function tagsHTML(tags) {
+  if (!tags || !tags.length) return '';
+  return `<div class="card-tags">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
+}
+
+function pointsHTML(points) {
+  if (!points || !points.length) return '';
+  return `<ul class="card-points">${points.map(p => `<li>${p}</li>`).join('')}</ul>`;
+}
+
+function renderExperience() {
+  const el = document.getElementById('list-experience');
+  if (!data.experience.length) { el.innerHTML = emptyState('No experience added yet.'); return; }
+  el.innerHTML = data.experience.map(e => `
+    <div class="work-card">
+      ${cardActions('experience', e.id)}
+      <div class="card-top">
+        <div class="card-role">${e.role}</div>
+        <div class="card-sub">${e.company}</div>
+        <div class="card-date">${e.date}</div>
+      </div>
+      <div class="card-body">
+        ${pointsHTML(e.points)}
+        ${tagsHTML(e.tags)}
+      </div>
+    </div>`).join('');
+}
+
+function renderProjects() {
+  const el = document.getElementById('list-projects');
+  if (!data.projects.length) { el.innerHTML = emptyState('No projects added yet.'); return; }
+  el.innerHTML = data.projects.map(e => `
+    <div class="work-card">
+      ${cardActions('projects', e.id)}
+      <div class="card-top">
+        <div class="card-role">${e.role}</div>
+        <div class="card-sub">${e.company}</div>
+        <div class="card-date">${e.date}</div>
+      </div>
+      <div class="card-body">
+        ${pointsHTML(e.points)}
+        ${tagsHTML(e.tags)}
+        ${e.outcome ? `<div class="card-outcome">${e.outcome}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function renderCertifications() {
+  const el = document.getElementById('list-certifications');
+  if (!data.certifications.length) { el.innerHTML = emptyState('No certifications added yet.'); return; }
+  el.innerHTML = data.certifications.map(e => `
+    <div class="cert-card" style="position:relative;">
+      ${cardActions('certifications', e.id)}
+      <div class="cert-badge">${e.emoji || '🎓'}</div>
+      <div class="cert-info">
+        <div class="cert-name">${e.name}</div>
+        <div class="cert-issuer">${e.issuer}</div>
+        <div class="cert-year">${e.year}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderResearch() { renderGeneric('research'); }
+function renderCreative()  { renderGeneric('creative'); }
+function renderStrategy()  { renderGeneric('strategy'); }
+function renderWorkflow()  { renderGeneric('workflow'); }
+
+function renderGeneric(section) {
+  const el = document.getElementById('list-' + section);
+  if (!data[section].length) { el.innerHTML = emptyState('Nothing added yet.'); return; }
+  el.innerHTML = data[section].map(e => `
+    <div class="work-card">
+      ${cardActions(section, e.id)}
+      <div class="card-top">
+        <div class="card-role">${e.role}</div>
+        <div class="card-sub">${e.company}</div>
+        <div class="card-date">${e.date}</div>
+      </div>
+      <div class="card-body">
+        ${pointsHTML(e.points)}
+        ${tagsHTML(e.tags)}
+        ${e.outcome ? `<div class="card-outcome">${e.outcome}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function emptyState(msg) {
+  return `<div class="empty-state"><div class="empty-icon">📭</div><p>${msg}<br/>Enable Edit Mode to add entries.</p></div>`;
+}
+
+function updateCounts() {
+  ['experience','projects','certifications','research','creative','strategy','workflow'].forEach(s => {
+    const el = document.getElementById('cnt-' + s);
+    if (el) el.textContent = data[s].length;
+  });
+}
+
+// ─────────────────────────────────────────────
+// EDIT MODE
+// ─────────────────────────────────────────────
+function toggleEditMode() {
+  editMode = !editMode;
+  document.body.classList.toggle('edit-mode', editMode);
+  const btn = document.getElementById('editToggle');
+  btn.classList.toggle('active', editMode);
+  btn.innerHTML = `<div class="edit-dot"></div>${editMode ? 'Exit Edit Mode' : 'Edit Mode'}`;
+}
+
+// ─────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────
+function openModal(section, id = null) {
+  modalSection = section;
+  editingId = id;
+  const overlay = document.getElementById('modalOverlay');
+  const title = document.getElementById('modalTitle');
+  const form = document.getElementById('modalForm');
+
+  let existing = null;
+  if (id !== null) {
+    existing = data[section].find(e => e.id === id);
+  }
+
+  const labels = {
+    experience:     'Role / Position',
+    projects:       'Project Name',
+    certifications: 'Certification Name',
+    research:       'Research Title',
+    creative:       'Creative Work Title',
+    strategy:       'Strategy / Framework Title',
+    workflow:       'Workflow Name'
+  };
+
+  title.textContent = (id ? 'Edit' : 'Add') + ' — ' + section.charAt(0).toUpperCase() + section.slice(1);
+
+  if (section === 'certifications') {
+    form.innerHTML = `
+      <div class="form-group">
+        <label>Certification Name</label>
+        <input id="f-name" type="text" placeholder="e.g. Google Ads Search Certification" value="${existing?.name||''}"/>
+      </div>
+      <div class="form-group">
+        <label>Issuing Organisation</label>
+        <input id="f-issuer" type="text" placeholder="e.g. Google, HubSpot, Coursera" value="${existing?.issuer||''}"/>
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <input id="f-year" type="text" placeholder="e.g. 2024" value="${existing?.year||''}"/>
+      </div>
+      <div class="form-group">
+        <label>Emoji Icon</label>
+        <input id="f-emoji" type="text" placeholder="e.g. 🎓" value="${existing?.emoji||'🎓'}"/>
+      </div>`;
+  } else {
+    form.innerHTML = `
+      <div class="form-group">
+        <label>${labels[section]||'Title'}</label>
+        <input id="f-role" type="text" placeholder="Enter title..." value="${existing?.role||''}"/>
+      </div>
+      <div class="form-group">
+        <label>Organisation / Context</label>
+        <input id="f-company" type="text" placeholder="Company, client, or project type..." value="${existing?.company||''}"/>
+      </div>
+      <div class="form-group">
+        <label>Date / Period</label>
+        <input id="f-date" type="text" placeholder="e.g. Jan 2024 – Present" value="${existing?.date||''}"/>
+      </div>
+      <div class="form-group">
+        <label>Key Points</label>
+        <textarea id="f-points" placeholder="One point per line...">${existing?.points?.join('\n')||''}</textarea>
+        <div class="form-note">Enter each bullet point on a new line.</div>
+      </div>
+      <div class="form-group">
+        <label>Tags / Skills (comma separated)</label>
+        <input id="f-tags" type="text" placeholder="e.g. Google Ads, Meta, Analytics" value="${existing?.tags?.join(', ')||''}"/>
+      </div>
+      ${section !== 'experience' && section !== 'workflow' ? `
+      <div class="form-group">
+        <label>Outcome / Result (optional)</label>
+        <input id="f-outcome" type="text" placeholder="e.g. 🏅 Top-performing project" value="${existing?.outcome||''}"/>
+      </div>` : ''}`;
+  }
+
+  overlay.classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  modalSection = null; editingId = null;
+}
+
+function saveEntry() {
+  const section = modalSection;
+
+  if (section === 'certifications') {
+    const entry = {
+      id: editingId || Date.now(),
+      name:   document.getElementById('f-name').value.trim(),
+      issuer: document.getElementById('f-issuer').value.trim(),
+      year:   document.getElementById('f-year').value.trim(),
+      emoji:  document.getElementById('f-emoji').value.trim() || '🎓'
+    };
+    if (!entry.name) return alert('Please enter a certification name.');
+    upsert(section, entry);
+  } else {
+    const pointsRaw = document.getElementById('f-points').value;
+    const tagsRaw   = document.getElementById('f-tags').value;
+    const entry = {
+      id:      editingId || Date.now(),
+      role:    document.getElementById('f-role').value.trim(),
+      company: document.getElementById('f-company').value.trim(),
+      date:    document.getElementById('f-date').value.trim(),
+      points:  pointsRaw.split('\n').map(p=>p.trim()).filter(Boolean),
+      tags:    tagsRaw.split(',').map(t=>t.trim()).filter(Boolean),
+      outcome: document.getElementById('f-outcome')?.value.trim() || ''
+    };
+    if (!entry.role) return alert('Please enter a title.');
+    upsert(section, entry);
+  }
+
+  save();
+  renderAll();
+  closeModal();
+}
+
+function upsert(section, entry) {
+  const idx = data[section].findIndex(e => e.id === entry.id);
+  if (idx >= 0) data[section][idx] = entry;
+  else data[section].push(entry);
+}
+
+function deleteEntry(section, id) {
+  if (!confirm('Delete this entry?')) return;
+  data[section] = data[section].filter(e => e.id !== id);
+  save();
+  renderAll();
+}
+
+// ─────────────────────────────────────────────
+// SIDEBAR ACTIVE STATE
+// ─────────────────────────────────────────────
+const sections = ['experience','projects','certifications','research','creative','strategy','workflow'];
+
+window.addEventListener('scroll', () => {
+  let current = sections[0];
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  document.querySelectorAll('.sidebar-link').forEach(l => {
+    l.classList.toggle('active', l.dataset.section === current);
+  });
+});
+
+// close modal on overlay click
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+renderAll();
+</script>
+</body>
+</html>
